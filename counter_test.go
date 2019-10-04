@@ -34,10 +34,19 @@ func Test_CounterBasic(t *testing.T) {
 func Test_CounterFilter(t *testing.T) {
 	c := prepareTestCounter()
 	t.Run("most", func(t *testing.T) {
-
+		m := c.Most(1)
+		if m.Get("foo") != 2 {
+			t.Logf("%#v", m)
+			t.Fail()
+		}
 	})
 
 	t.Run("least", func(t *testing.T) {
+		l := c.Least(1)
+		if l.Get("bar") != 1 {
+			t.Logf("%#v", l)
+			t.Fail()
+		}
 
 	})
 }
