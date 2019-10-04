@@ -21,6 +21,11 @@ func (c *Counter) Add(m string) {
 	c.members[m]++
 }
 
+// Reset resets all observations, replacing the backing map with a new one.
+func (c *Counter) Reset() {
+	c.members = make(map[string]int)
+}
+
 // Get returns the number of times a value has been observed.
 func (c *Counter) Get(m string) int {
 	n, ok := c.members[m]
