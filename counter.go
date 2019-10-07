@@ -60,7 +60,7 @@ func (c *Counter) Set(m string, n int) {
 }
 
 // Most returns the n most frequently observed values, as a Counter.
-// This is to faciliate further filtering of the provided data.
+// This is to facilitate further filtering of the provided data.
 func (c *Counter) Most(n int) Counter {
 	sorted := c.sorted()
 	r := New()
@@ -73,7 +73,7 @@ func (c *Counter) Most(n int) Counter {
 }
 
 // Least returns the n least frequently observed values, as a Counter.
-// This is to faciliate further filtering of the provided data.
+// This is to facilitate further filtering of the provided data.
 func (c *Counter) Least(n int) Counter {
 	sorted := c.sorted()
 	r := New()

@@ -85,7 +85,7 @@ func (c *{{ .Name }}Counter) Set(m {{ .Type }}, n int) {
 }
 
 // Most returns the n most frequently observed values, as a Counter.
-// This is to faciliate further filtering of the provided data.
+// This is to facilitate further filtering of the provided data.
 func (c *{{ .Name }}Counter) Most(n int) {{ .Name }}Counter {
 	sorted := c.sorted()
 	r := New()
@@ -98,7 +98,7 @@ func (c *{{ .Name }}Counter) Most(n int) {{ .Name }}Counter {
 }
 
 // Least returns the n least frequently observed values, as a Counter.
-// This is to faciliate further filtering of the provided data.
+// This is to facilitate further filtering of the provided data.
 func (c *{{ .Name }}Counter) Least(n int) {{ .Name }}Counter {
 	sorted := c.sorted()
 	r := New()
