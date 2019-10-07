@@ -1,6 +1,9 @@
 package counter
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 // New initializes a new Counter and its backing map.
 func New() Counter {
@@ -26,6 +29,19 @@ func (c *Counter) Reset() {
 	c.members = make(map[string]int)
 }
 
+func (c *Counter) sorted() []string {
+	var s []string
+	for k := range c.members {
+		s = append(s, k)
+	}
+
+	sort.Slice(s, func(i, j int) bool {
+		return c.Get(s[i]) > c.Get(s[j])
+	})
+
+	return s
+}
+
 // Get returns the number of times a value has been observed.
 func (c *Counter) Get(m string) int {
 	n, ok := c.members[m]
@@ -36,10 +52,20 @@ func (c *Counter) Get(m string) int {
 	return n
 }
 
+// Set sets the observation count for a given value to the provided int.
+func (c *Counter) Set(m string, n int) {
+	c.members[m] = n
+}
+
 // Most returns the n most frequently observed values, as a Counter.
 // This is to faciliate further filtering of the provided data.
 func (c *Counter) Most(n int) Counter {
-	var r Counter
+	sorted := c.sorted()
+	r := New()
+
+	for i := 0; i < len(sorted)-1; i++ {
+		r.Set(sorted[i], c.Get(sorted[i]))
+	}
 
 	return r
 }
@@ -47,7 +73,12 @@ func (c *Counter) Most(n int) Counter {
 // Least returns the n least frequently observed values, as a Counter.
 // This is to faciliate further filtering of the provided data.
 func (c *Counter) Least(n int) Counter {
-	var r Counter
+	sorted := c.sorted()
+	r := New()
+
+	for i := len(sorted) - 1; i >= 0; i-- {
+		r.Set(sorted[i], c.Get(sorted[i]))
+	}
 
 	return r
 }
