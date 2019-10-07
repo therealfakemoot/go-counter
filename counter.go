@@ -84,7 +84,3 @@ func (c *Counter) Least(n int) Counter {
 
 	return r
 }
-
-func main() {
-	fmt.Println("vim-go")
-}
