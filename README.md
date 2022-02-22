@@ -27,3 +27,4 @@ Generating a Counter for a type of your choosing is straightforward. From the pr
 `go run gen/main.go -type typeName > filename.go`
 
 Note: Use caution as not all types may be appropriate for use as keys. Be mindful, this package is released without warranty or guarantee.
+

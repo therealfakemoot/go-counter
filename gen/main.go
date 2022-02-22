@@ -28,13 +28,12 @@ var counterTemplate = `
 package counter
 
 import (
-	"fmt"
 	"sort"
 )
 
 // New initializes a new Counter and its backing map.
 func New{{ .Name }}Counter() {{ .Name }}Counter {
-	var c Counter
+	var c {{ .Name }}Counter
 	c.members = make(map[{{ .Type }}]int)
 
 	return c
@@ -88,7 +87,7 @@ func (c *{{ .Name }}Counter) Set(m {{ .Type }}, n int) {
 // This is to facilitate further filtering of the provided data.
 func (c *{{ .Name }}Counter) Most(n int) {{ .Name }}Counter {
 	sorted := c.sorted()
-	r := New()
+	r := New{{ .Name }}Counter()
 
 	for i := 0; i < len(sorted)-1; i++ {
 		r.Set(sorted[i], c.Get(sorted[i]))
@@ -101,7 +100,7 @@ func (c *{{ .Name }}Counter) Most(n int) {{ .Name }}Counter {
 // This is to facilitate further filtering of the provided data.
 func (c *{{ .Name }}Counter) Least(n int) {{ .Name }}Counter {
 	sorted := c.sorted()
-	r := New()
+	r := New{{ .Name }}Counter()
 
 	for i := len(sorted) - 1; i >= 0; i-- {
 		r.Set(sorted[i], c.Get(sorted[i]))
